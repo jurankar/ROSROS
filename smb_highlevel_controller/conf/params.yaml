@@ -1,0 +1,4 @@
+topic: /scan
+queue_size: 42
+odom_topic: /odom
+

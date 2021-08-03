@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+    <node name="controller" pkg="smb_highlevel_controller" type="controller_node" output="screen">
+		<rosparam command="load" file="$(find smb_highlevel_controller)/conf/params.yaml" />
+	</node>
+</launch>

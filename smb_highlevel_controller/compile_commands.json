@@ -1,0 +1,42 @@
+[
+{
+  "directory": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/build/smb_highlevel_controller",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"smb_highlevel_controller\\\" -I/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -std=c++11 -o CMakeFiles/smb_highlevel_controller.dir/src/smb_highlevel_controller_node.cpp.o -c /home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/src/smb_highlevel_controller_node.cpp",
+  "file": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/src/smb_highlevel_controller_node.cpp"
+},
+{
+  "directory": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/build/smb_highlevel_controller",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"smb_highlevel_controller\\\" -I/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -std=c++11 -o CMakeFiles/smb_highlevel_controller.dir/src/SmbHighlevelController.cpp.o -c /home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/src/SmbHighlevelController.cpp",
+  "file": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/src/SmbHighlevelController.cpp"
+},
+{
+  "directory": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/build/smb_highlevel_controller",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"smb_highlevel_controller\\\" -I/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -std=c++11 -o CMakeFiles/controller_node.dir/src/controller.cpp.o -c /home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/src/controller.cpp",
+  "file": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/src/controller.cpp"
+},
+{
+  "directory": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/build/smb_highlevel_controller",
+  "command": "/usr/bin/c++  -DROSCONSOLE_BACKEND_LOG4CXX -DROS_BUILD_SHARED_LIBS=1 -DROS_PACKAGE_NAME=\\\"smb_highlevel_controller\\\" -I/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/include -I/opt/ros/noetic/include -I/opt/ros/noetic/share/xmlrpcpp/cmake/../../../include/xmlrpcpp    -std=c++11 -o CMakeFiles/controller_node.dir/src/Controller.cpp.o -c /home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/src/Controller.cpp",
+  "file": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/src/turtlebot3-pick-and-place-darrel223/smb_highlevel_controller/src/Controller.cpp"
+},
+{
+  "directory": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/build/smb_highlevel_controller/gtest/googlemock",
+  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_main_EXPORTS -isystem /usr/src/googletest/googlemock/include -isystem /usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock_main.dir/src/gmock_main.cc.o -c /usr/src/googletest/googlemock/src/gmock_main.cc",
+  "file": "/usr/src/googletest/googlemock/src/gmock_main.cc"
+},
+{
+  "directory": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/build/smb_highlevel_controller/gtest/googlemock",
+  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgmock_EXPORTS -I/usr/src/googletest/googlemock/include -I/usr/src/googletest/googlemock -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gmock.dir/src/gmock-all.cc.o -c /usr/src/googletest/googlemock/src/gmock-all.cc",
+  "file": "/usr/src/googletest/googlemock/src/gmock-all.cc"
+},
+{
+  "directory": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/build/smb_highlevel_controller/gtest/googletest",
+  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_main_EXPORTS -isystem /usr/src/googletest/googletest/include -isystem /usr/src/googletest/googletest  -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -DGTEST_HAS_PTHREAD=1 -std=c++11 -o CMakeFiles/gtest_main.dir/src/gtest_main.cc.o -c /usr/src/googletest/googletest/src/gtest_main.cc",
+  "file": "/usr/src/googletest/googletest/src/gtest_main.cc"
+},
+{
+  "directory": "/home/hunter/zzzzz/ros/jio/darrel223/gitlab_ws/build/smb_highlevel_controller/gtest/googletest",
+  "command": "/usr/bin/c++  -DGTEST_CREATE_SHARED_LIBRARY=1 -Dgtest_EXPORTS -I/usr/src/googletest/googletest/include -I/usr/src/googletest/googletest  -fPIC   -Wall -Wshadow -Wno-error=dangling-else -DGTEST_HAS_PTHREAD=1 -fexceptions -Wextra -Wno-unused-parameter -Wno-missing-field-initializers -std=c++11 -std=c++11 -o CMakeFiles/gtest.dir/src/gtest-all.cc.o -c /usr/src/googletest/googletest/src/gtest-all.cc",
+  "file": "/usr/src/googletest/googletest/src/gtest-all.cc"
+}
+]

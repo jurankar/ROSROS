@@ -1,0 +1,44 @@
+<launch>
+  <arg name="model" default="burger" doc="model type [burger, waffle, waffle_pi]"/>
+  <arg name="x_pos" default="-0.127"/>
+  <arg name="y_pos" default="-0.58"/>
+  <arg name="z_pos" default="0.0"/>
+
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="world_name" value="$(find road_assistance)/worlds/road_assistance_with_objects.world"/>
+    <arg name="paused" value="false"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+		<!--arg name="laser_enabled" value="true"/-->
+  </include>
+
+  <!-- controller utils -->
+  <!-- <include file="$(find open_manipulator_hw)/launch/controller_utils.launch"/> -->
+
+  
+  <rosparam file="$(find open_manipulator_controllers)/config/joint_trajectory_controller_gazebo.yaml" command="load"/>
+  
+  <node name="arm_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="spawn arm_controller"/>
+  <node name="gripper_controller_spawner" pkg="controller_manager" type="controller_manager" respawn="false" output="screen" args="spawn gripper_controller"/>
+  <param name="robot_description" command="$(find xacro)/xacro --inorder $(find turtlebot3_description)/urdf/turtlebot3_$(arg model).urdf.xacro" />
+
+
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf" args="-urdf -model turtlebot3_$(arg model) -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+  
+  <!-- RVIZ & statepublisher-->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find smb_highlevel_controller)/rviz/smb_highlevel_controller.rviz"/>
+  <node pkg="robot_state_publisher" type="robot_state_publisher" name="robot_state_publisher">
+  </node>
+
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher">
+    <param name="use_gui" value="true"/>
+  </node>
+
+  <node name="controller" pkg="smb_highlevel_controller" type="controller_node" output="screen">
+		<rosparam command="load" file="$(find smb_highlevel_controller)/conf/params.yaml" />
+  </node>
+  
+
+</launch>

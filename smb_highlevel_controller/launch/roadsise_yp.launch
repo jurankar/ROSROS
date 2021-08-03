@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<launch>	
+	<include file="$(find smb_gazebo)/launch/smb_gazebo.launch">
+    	<arg name="world_file" value="$(find road_assistance)/worlds/road_assistance.world"/>
+		<arg name="x" value="-2.0"/>
+		<arg name="laser_enabled" value="true"/>
+	</include>
+	<node name="smb_highlevel_controller" pkg="smb_highlevel_controller" type="smb_highlevel_controller" output="screen">
+		<rosparam command="load" file="$(find smb_highlevel_controller)/conf/params.yaml" />
+	</node>
+
+	<node name="rviz" pkg="rviz" type="rviz" args="-d $(find smb_highlevel_controller)/rviz/smb_highlevel_controller.rviz"/>
+	
+</launch>
