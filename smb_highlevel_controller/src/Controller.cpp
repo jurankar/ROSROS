@@ -53,7 +53,7 @@ namespace controller
 
 		// scan for ranges
 		int ranges_length = msg->ranges.size();
-		float front_direction_index = msg->ranges[ranges_length/2];
+		int front_direction_index = ranges_length/2;
 
 		float range_min = msg->ranges[0];
 		float range_min_index = 0;
@@ -67,11 +67,12 @@ namespace controller
 		}
 
 		// print info
-		ROS_INFO_STREAM_THROTTLE(2.0,"Range min: " << range_min);
-		ROS_INFO_STREAM_THROTTLE(2.0,"Range front: " << msg->ranges[front_direction_index]);
-		ROS_INFO_STREAM_THROTTLE(2.0,"x:" <<  x);
-		ROS_INFO_STREAM_THROTTLE(0.2,"yaw:" <<  yaw);
+		ROS_INFO_STREAM_THROTTLE(0.2,"Range min: " << range_min << "     laser_index: " << range_min_index);
+		ROS_INFO_STREAM_THROTTLE(0.2,"Range front: " << msg->ranges[front_direction_index] << "     front_index: " << front_direction_index);
+		//ROS_INFO_STREAM_THROTTLE(2.0,"x:" <<  x);
+		ROS_INFO_STREAM_THROTTLE(0.6,"yaw:" <<  yaw);
 		//ROS_INFO_STREAM_THROTTLE(0.5,"max_yaw:" <<  max_yaw);
+		//ROS_INFO_STREAM_THROTTLE(2.0, msg->ranges);
 
 
 
@@ -82,10 +83,12 @@ namespace controller
 		float arm_pose_up[4] = {0.0, 0.7, 0.1, -0.22};
 
 
+		//	FILL THE CAR BATTERIES
+
 		// 0-1: go infront of batteries and turn left
 		if(stage == 0 && Controller::goForward(-0.15, true))
 			stage = 1;
-		if(stage == 1 && Controller::turn(1.0))
+		if(stage == 1 && Controller::turn(1.0, true))
 			stage = 2;
 
 		// 2-5: pick up the battery
@@ -101,11 +104,11 @@ namespace controller
 
 		// 6-13: put battery in first blue car
 		float arm_pose_down12[4] = {0.0, 0.9, -0.34, -0.22};
-		if(stage == 6 && Controller::turn(2.0))	//--> turn back
+		if(stage == 6 && Controller::turn(2.0, true))	//--> turn back
 			stage = 7;
 		if(stage == 7 && Controller::goForward(-0.55, true))	//--> go back to the blue car
 			stage = 8;
-		if(stage == 8 && Controller::turn(3.0))	// --> turn right
+		if(stage == 8 && Controller::turn(3.0, true))	// --> turn right
 			stage = 9;
 		if(stage == 9 && Controller::aproachObjectMinDistance(msg->ranges[front_direction_index], 0.26))	// --> approach blue car
 			stage = 10;
@@ -120,11 +123,11 @@ namespace controller
 		// blue car x positions:-0.1, 0.3, 0.7
 
 		// fill second car
-		if(stage == 13 && Controller::turn(0.0))	// --> turn forward
+		if(stage == 13 && Controller::turn(0.0, true))	// --> turn forward
 			stage = 14;
 		if(stage == 14 && Controller::goForward(-0.06, true))
 			stage = 15;
-		if(stage == 15 && Controller::turn(1.0))
+		if(stage == 15 && Controller::turn(1.0, true))
 			stage = 16;
 		float arm_pose_down21[4] = {0.0, -0.14, -0.11, -0.22};
 		if(stage == 16 && Controller::controllGripper(true)) // --> open gripper
@@ -140,7 +143,7 @@ namespace controller
 			stage = 21;
 		if(stage == 21 && Controller::goForward(-0.55, true))	//--> go to the blue car n2
 			stage = 22;*/
-		if(stage == 22 && Controller::turn(3.0))	// --> turn right
+		if(stage == 22 && Controller::turn(3.0, true))	// --> turn right
 			stage = 23;
 		if(stage == 23 && Controller::aproachObjectMinDistance(msg->ranges[front_direction_index], 0.26))	// --> approach blue car
 			stage = 24;
@@ -153,11 +156,11 @@ namespace controller
 		// CHECKPOINT 2 postition: x:-0.127    y:-0.58
 
 		// fill third car
-		if(stage == 27 && Controller::turn(0.0))	// --> turn forward
+		if(stage == 27 && Controller::turn(0.0, true))	// --> turn forward
 			stage = 28;
 		if(stage == 28 && Controller::goForward(0.1, true))
 			stage = 29;
-		if(stage == 29 && Controller::turn(1.0))
+		if(stage == 29 && Controller::turn(1.0, true))
 			stage = 34;
 		float arm_pose_down31[4] = {0.0, -0.14, -0.11, -0.22};
 		if(stage == 30 && Controller::controllGripper(true)) // --> open gripper
@@ -169,11 +172,11 @@ namespace controller
 		if(stage == 33 && Controller::controllArm(arm_pose_down31)) // --> move arm up
 			stage = 34;
 		float arm_pose_down32[4] = {0.0, 0.9, -0.34, -0.22};
-		if(stage == 34 && Controller::turn(0.0))	//--> turn forward
+		if(stage == 34 && Controller::turn(0.0, false))	//--> turn forward
 			stage = 35;
-		if(stage == 35 && Controller::goForward(0.37, true))	//--> go to the blue car n3
+		if(stage == 35 && Controller::goForward(0.31, true))	//--> go to the blue car n3
 			stage = 36;
-		if(stage == 36 && Controller::turn(3.0))	// --> turn right
+		if(stage == 36 && Controller::turn(3.0, false))	// --> turn right
 			stage = 37;
 		if(stage == 37 && Controller::aproachObjectMinDistance(msg->ranges[front_direction_index], 0.26))	// --> approach blue car
 			stage = 38;
@@ -183,18 +186,95 @@ namespace controller
 			stage = 40;
 		if(stage == 40 && Controller::controllArm(arm_pose_default)) // --> move arm to default position
 			stage = 41;
+		// CHECKPOINT 3 postition: x:0.3   y:-0.58
+
+		// fill fourth car
+		if(stage == 41 && Controller::turn(2.0, false))	// --> turn backward
+			stage = 42;
+		if(stage == 42 && Controller::goForward(0.17, true))
+			stage = 43;
+		if(stage == 43 && Controller::turn(1.0, false))
+			stage = 48;
+		float arm_pose_down41[4] = {0.0, -0.14, -0.11, -0.22};
+		if(stage == 44 && Controller::controllGripper(true)) // --> open gripper
+			stage = 45;
+		if(stage == 45 && Controller::controllArm(arm_pose_up)) // --> move arm on the block
+			stage = 46;
+		if(stage == 46 && Controller::controllGripper(false)) // --> close gripper
+			stage = 47;
+		if(stage == 47 && Controller::controllArm(arm_pose_down31)) // --> move arm up
+			stage = 48;
+		float arm_pose_down42[4] = {0.0, 0.9, -0.34, -0.22};
+		if(stage == 48 && Controller::turn(0.0, false))	//--> turn forward
+			stage = 49;
+		if(stage == 49 && Controller::goForward(0.72, true))	//--> go to the blue car n3
+			stage = 50;
+		if(stage == 50 && Controller::turn(3.0, false))	// --> turn right
+			stage = 51;
+		if(stage == 51 && Controller::aproachObjectMinDistance(msg->ranges[front_direction_index], 0.26))	// --> approach blue car
+			stage = 52;
+		if(stage == 52 && Controller::controllArm(arm_pose_down32)) // --> move arm on the block
+			stage = 53;
+		if(stage == 53 && Controller::controllGripper(true)) // --> open gripper
+			stage = 54;
+		if(stage == 54 && Controller::controllArm(arm_pose_default)) // --> move arm to default position
+			stage = 55;
+		// CHECKPOINT 3 postition: x:0.66   y:-0.58
 
 
+		//	PICK UP THE SIGNS AND PUT THEM AROUND CAR
+
+		// go to signs
+		if(stage == 55 && Controller::goForward(0.8, true))
+			stage = 56;
+		if(stage == 56 && Controller::turn(1.0, true))	// --> turn left
+			stage = 57;
+		if(stage == 57 && Controller::goForward(0.3, false))
+			stage = 58;
+		if(stage == 58 && Controller::turn(2.0, true))	// --> turn backward
+			stage = 59;
+		if(stage == 59 && Controller::goForward(0.25, true))
+			stage = 60;
+		if(stage == 60 && Controller::turn(3.0, false))	// --> turn right	TODO SET TO TRUEEEE
+			stage = 61;
+		float arm_pose_back51[4] = {0.0, -0.7, -0.5, 0.0};
+		if(stage == 61 && Controller::controllArm(arm_pose_back51)) // --> move arm to back postition, so the robot also leans back so the sensors see more
+			stage = 62;
+		if(stage == 62 && Controller::aproachObjectMinDistance(msg->ranges[front_direction_index], 0.2))	// --> approach blue car
+			stage = 63;
+		if(stage == 63 && Controller::allignWithObject(front_direction_index, range_min_index))	// --> allign with the object
+			stage = 64;
+		if(stage == 64 && Controller::controllGripper(true)) // --> open gripper
+			stage = 65;
+		float arm_pose_sign[4] = {0.0, 0.73, 0.22, -0.56};
+		if(stage == 65 && Controller::controllArm(arm_pose_sign)) // --> move arm on the sign
+			stage = 66;
+		if(stage == 66 && Controller::controllGripper(false)) // --> close gripper
+			stage = 67;
+		if(stage == 67 && Controller::controllArm(arm_pose_up)) // --> move arm up
+			stage = 68;
+
+		//TODO :
+		/*
+		 * 4th car battery  Y
+		 * go to signs	Y
+		 * reposition for piciking up signs (new function)	Y
+		 * remove stupid moving fucking car	Y
+		 * arm pose names fix
+		 * pick up signs and put them around car spot
+		 * pick up blocks and put them on new car
+		 *
+		 */
 
 
 
 
 		// DEBUGGING
-		if(stage == -1 && Controller::turn(3.0))	//--> turn right
+		if(stage == -1 && Controller::turn(3.0, true))	//--> turn right
 			stage = -2;
-		if(stage == -2 && Controller::turn(2.0))	//--> turn back
+		if(stage == -2 && Controller::turn(2.0, true))	//--> turn back
 			stage = -3;
-		if(stage == -3 && Controller::turn(1.0))	//--> turn left
+		if(stage == -3 && Controller::turn(1.0, true))	//--> turn left
 			stage = -4;
 
 
@@ -206,6 +286,32 @@ namespace controller
     	Controller::controllGripper(true);
         ros::Duration(5).sleep();
     	Controller::controllGripper(false);
+    }
+
+    bool Controller::allignWithObject(int front_direction_index, int range_min_index){
+    	// +-40 is not ideal, but because robot often gets trapped in a bump it is unfortunate necessary measure
+    	// this could be solved by increasing angular.z, but we can't because corrections would be too big
+    	if(front_direction_index-40 <= range_min_index &&  range_min_index <= front_direction_index+40){
+			ROS_INFO("Finished alligning            stage: %i", stage);
+			ros::Duration(2.0).sleep();
+    		return true;
+    	}
+    	else{
+    		if(front_direction_index > range_min_index){
+    			cmd_val_values_.angular.z = -0.1;
+    			// ROS_INFO("go right");
+
+    		}
+    		else{
+    			cmd_val_values_.angular.z = 0.1;
+    			// ROS_INFO("go left");
+    		}
+
+    		cmd_vel_publisher_.publish(cmd_val_values_);
+    		return false;
+    	}
+
+
     }
 
     bool Controller::aproachObjectMinDistance(float front_dir_sen_length, float goal_distance){
@@ -252,13 +358,15 @@ namespace controller
 
 
 
-    bool Controller::turn(double direction)
+    bool Controller::turn(double direction, bool leftRight)		// leftRight defines the direction of turning ---> left=True     right=False
     { // direction = 0 --> forward; direction 1 --> left; direction 2 --> back; direction 3 --> right
         geometry_msgs::Twist cmd_val_values;
-
-        double base_turn_yaw = 1.571;	// maybe 1.56424
-        double target_yaw = direction * base_turn_yaw;
         double multiplier = 1.0;
+        if(not leftRight)
+            multiplier = -1.0;
+
+        double base_turn_yaw = 1.571;	//3.142	// maybe 1.56424
+        double target_yaw = direction * base_turn_yaw;
         if(direction == 2.0)
         	target_yaw = 2 * base_turn_yaw;  // 3.13;
         if(direction == 3.0)
@@ -268,7 +376,7 @@ namespace controller
 
 		if(not rotating){
 			ROS_INFO("Turning in direction %f        target yaw: %f", direction, target_yaw);
-			cmd_val_values.angular.z = 0.5;
+			cmd_val_values.angular.z = multiplier * 0.5;
 			rotating = true;
 		}
 		else{
@@ -383,3 +491,12 @@ namespace controller
 
 
 } // namespace smb_highlevel_controller
+
+
+/*
+ * realigned sensor and its size
+ * fucking arm
+ * fucking bot
+ *
+ *
+ */

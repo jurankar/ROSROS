@@ -1411,7 +1411,7 @@
 
     <include>
         <uri>model://blue_truck</uri>
-        <pose>-0.81448 0.10004 0.075998 -3.14159 0 0</pose>
+        <pose>-30.81448 0.10004 0.075998 -3.14159 0 0</pose>
     </include>
    
     <!-- red and blue cars (in fixed alternating order) -->

@@ -28,13 +28,14 @@ class Controller {
   void odomCallback(const nav_msgs::Odometry::ConstPtr& msg);
   void timerCallback(const ros::TimerEvent& e);
   bool goForward(float xy_goal, bool xy);
-  bool turn(double direction);
+  bool turn(double direction, bool leftRight);
   bool goForward(double xy_goal, bool xy);
   bool aproachObjectMinDistance(float front_dir_sen_length, float goal_distance);
+  bool allignWithObject(int front_direction_index, int range_min_index);
   double x, y, yaw;
   bool rotating = false;
   bool moving_arm = false;
-  int stage = 27;
+  int stage = 60;
   
 
   ros::NodeHandle nodeHandle_;
