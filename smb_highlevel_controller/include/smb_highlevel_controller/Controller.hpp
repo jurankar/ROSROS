@@ -35,7 +35,7 @@ class Controller {
   double x, y, yaw;
   bool rotating = false;
   bool moving_arm = false;
-  int stage = 60;
+  int stage = 168;
   
 
   ros::NodeHandle nodeHandle_;
